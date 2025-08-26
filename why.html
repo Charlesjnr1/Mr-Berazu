@@ -92,7 +92,7 @@
         .navbar-brand {
             font-family: 'Oswald', sans-serif;
             font-weight: bold;
-            font-size: 24px;
+            font-size: 19px;
             color: var(--primary) !important;
         }
         
@@ -240,76 +240,88 @@
             font-weight: 500;
         }
         
-        .team {
-            padding: 100px 0;
-        }
-        
-        .team-item {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-            margin-bottom: 30px;
-        }
-        
-        .team-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .team-img {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .team-img img {
-            width: 100%;
-            transition: all 0.3s;
-        }
-        
-        .team-item:hover .team-img img {
-            transform: scale(1.1);
-        }
-        
-        .team-text {
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .team-text h2 {
-            font-size: 20px;
-            margin-bottom: 5px;
-        }
-        
-        .team-text p {
-            color: var(--primary);
-            font-style: italic;
-            margin-bottom: 15px;
-        }
-        
-        .team-social {
-            display: flex;
-            justify-content: center;
-        }
-        
-        .team-social a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            background: var(--light);
-            color: var(--dark);
-            margin: 0 3px;
-            transition: all 0.3s;
-        }
-        
-        .team-social a:hover {
-            background: var(--primary);
-            color: white;
-        }
+        /* Team Section */
+.team {
+  padding: 80px 0;
+  background: #f8f9fa;
+  text-align: center;
+}
+
+.team .section-header p {
+  font-size: 18px;
+  color: #007bff;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.team .section-header h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 50px;
+}
+
+/* Center content */
+.team .row {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.team-item {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  transition: all 0.4s ease;
+  width: 260px;
+}
+
+.team-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+
+.team-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.team-text {
+  padding: 20px;
+}
+
+.team-text h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: #222;
+}
+
+.team-text p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.team-social {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.team-social a {
+  color: #007bff;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.team-social a:hover {
+  color: #0056b3;
+}
+
         
         .footer {
             background: var(--dark);
@@ -526,7 +538,7 @@
     <!-- Nav Bar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top">
         <div class="container-fluid">
-            <a href="index.html" class="navbar-brand">B3 CONSULTING</a>
+            <a href="index.html" class="navbar-brand">B3 STRATEGIC CONSULTING</a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -548,7 +560,7 @@
                             <a href="#" class="dropdown-item">Sustainability & Growth</a>
                         </div>
                     </div>
-                    <a href="price.html" class="nav-item nav-link">Pricing</a>
+                    <a href="Price.html" class="nav-item nav-link">Pricing</a>
                     <a href="advisor.html" class="nav-item nav-link">Blogs</a>
                     <a href="review.html" class="nav-item nav-link">Resources</a>
                     <a href="appointment.html" class="nav-item nav-link">Appointment</a>                        
@@ -587,7 +599,7 @@
                 <div class="col-md-6">
                     <div class="section-header">
                         <p>Learn About Us</p>
-                        <h2>25 Years Experience</h2>
+                        <h2>10 Years Experience</h2>
                     </div>
                     <div class="about-text">
                         <p>
@@ -626,7 +638,7 @@
                             <div class="counters-text">
                                 <i class="fa fa-user"></i>
                                 <div>
-                                    <h2 data-toggle="counter-up">100</h2>
+                                    <h2 data-toggle="counter-up">15</h2>
                                     <p>Our Staffs</p>
                                 </div>
                             </div>
@@ -690,56 +702,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="team-item">
-                        <div class="team-img">
-                            <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80" alt="Team Image">
-                        </div>
-                        <div class="team-text">
-                            <h2>Adam Phillips</h2>
-                            <p>Chef Executive</p>
-                            <div class="team-social">
-                                <a href=""><i class="fab fa-twitter"></i></a>
-                                <a href=""><i class="fab fa-facebook-f"></i></a>
-                                <a href=""><i class="fab fa-linkedin-in"></i></a>
-                                <a href=""><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="team-item">
-                        <div class="team-img">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80" alt="Team Image">
-                        </div>
-                        <div class="team-text">
-                            <h2>Thomas Olsen</h2>
-                            <p>Chef Advisor</p>
-                            <div class="team-social">
-                                <a href=""><i class="fab fa-twitter"></i></a>
-                                <a href=""><i class="fab fa-facebook-f"></i></a>
-                                <a href=""><i class="fab fa-linkedin-in"></i></a>
-                                <a href=""><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="team-item">
-                        <div class="team-img">
-                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80" alt="Team Image">
-                        </div>
-                        <div class="team-text">
-                            <h2>James Alien</h2>
-                            <p>Advisor</p>
-                            <div class="team-social">
-                                <a href=""><i class="fab fa-twitter"></i></a>
-                                <a href=""><i class="fab fa-facebook-f"></i></a>
-                                <a href=""><i class="fab fa-linkedin-in"></i></a>
-                                <a href=""><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
+                
                 </div>
             </div>
         </div>
