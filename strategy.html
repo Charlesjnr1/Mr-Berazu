@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategy Consulting - B3 Strategic Consulting</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap">
+    <style>
+        :root {
+            --primary: #1a5276;
+            --secondary: #2e86c1;
+            --accent: #f39c12;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --transition: all 0.3s ease-in-out;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            position: relative;
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links i {
+            margin-left: 5px;
+            transition: var(--transition);
+        }
+        
+        .dropdown:hover i {
+            transform: rotate(180deg);
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            width: 220px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            z-index: 100;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-menu li {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .dropdown-menu a {
+            padding: 12px 20px;
+            display: block;
+            border-bottom: 1px solid #f1f1f1;
+        }
+        
+        .dropdown-menu a:hover {
+            background: var(--light);
+            color: var(--primary);
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 100px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 0;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.07)"/></svg>');
+            background-size: 100% 100%;
+        }
+        
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .breadcrumb {
+            background-color: var(--light);
+            padding: 15px 0;
+            margin-bottom: 30px;
+        }
+        
+        .breadcrumb-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .breadcrumb-links a {
+            color: var(--dark);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .breadcrumb-links a:hover {
+            color: var(--primary);
+        }
+        
+        .breadcrumb-links span {
+            color: var(--secondary);
+            margin: 0 10px;
+        }
+        
+        .service-hero {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin: 50px 0;
+            align-items: center;
+        }
+        
+        .hero-content {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .hero-content h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            color: #555;
+        }
+        
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: var(--transition);
+            position: relative;
+            height: 400px;
+        }
+        
+        .hero-image:hover {
+            transform: perspective(1000px) rotateY(0);
+        }
+        
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: var(--transition);
+        }
+        
+        .services-details {
+            background: white;
+            padding: 60px 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+            margin: 50px 0;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .service-item {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 30px;
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+            border-left: 5px solid var(--accent);
+        }
+        
+        .service-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .service-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-item i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .service-item h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .service-item p {
+            color: #555;
+        }
+        
+        .benefits-section {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 70px 0;
+            margin: 70px 0;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .benefits-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,70 C20,40 50,100 100,70 L100,100 L0,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: 100% 100%;
+        }
+        
+        .benefits-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .benefit-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+        
+        .benefit-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .benefit-item:nth-child(even) {
+            transform: translateX(30px);
+        }
+        
+        .benefit-item:nth-child(even).visible {
+            transform: translateX(0);
+        }
+        
+        .benefit-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px) !important;
+        }
+        
+        .benefit-item i {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        
+        .cta-section {
+            text-align: center;
+            padding: 80px 0;
+        }
+        
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-content h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #555;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            box-shadow: 0 5px 20px rgba(243, 156, 18, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button:hover {
+            background: #e67e22;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(243, 156, 18, 0.5);
+        }
+        
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0));
+            transform: rotate(30deg);
+            transition: var(--transition);
+            opacity: 0;
+        }
+        
+        .cta-button:hover::after {
+            animation: shine 1.5s ease;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 50px 0 30px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .footer-logo {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-logo h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .footer-logo span {
+            color: var(--accent);
+        }
+        
+        .footer-contact {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-contact h4 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .contact-info {
+            list-style: none;
+        }
+        
+        .contact-info li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info i {
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes shine {
+            0% {
+                opacity: 0;
+                transform: rotate(30deg) translate(0, -100%);
+            }
+            20% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: rotate(30deg) translate(0, 100%);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 10px 15px;
+            }
+            
+            .dropdown-menu {
+                left: -50%;
+            }
+            
+            .service-hero {
+                flex-direction: column;
+            }
+            
+            .hero-image {
+                transform: none;
+                height: 300px;
+            }
+            
+            .hero-image:hover {
+                transform: none;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="#" class="logo">B3 Strategic Consulting</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="why.html">Why us</a></li>
+                <li class="dropdown">
+                    <a href="#">Services <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="strategy.html">Strategy Consulting</a></li>
+                        <li><a href="operation.html">Operations Optimization</a></li>
+                        <li><a href="business.html">Business Analytics & Insights</a></li>
+                        <li><a href="cyb.html">Cybersecurity for Businesses</a></li>
+                        <li><a href="Digital.html">Digital Transformation</a></li>
+                        <li><a href="financial.html">Financial & Risk Management</a></li>
+                        <li><a href="org.html">Organizational Development & Training</a></li>
+                        <li><a href="sus.html">Sustainability & Growth Consulting</a></li>
+                    </ul>
+                </li>
+                <li><a href="price.html">Pricing</a></li>
+                <li><a href="blog.html">Blogs</a></li>
+                <li><a href="resour.html">Resources</a></li>
+                <li><a href="appoint.html">Appointment</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container">
+            <h1>Strategy Consulting Services</h1>
+            <p>Expert guidance to develop winning strategies for sustainable business growth</p>
+        </div>
+    </header>
+    
+    
+    <section class="container service-hero">
+        <div class="hero-content">
+            <h2>Strategic Vision for Business Success</h2>
+            <p>Our Strategy Consulting services are designed to help organizations navigate complex business environments, make informed decisions, and achieve sustainable competitive advantage.</p>
+            <p>We combine industry expertise with analytical rigor to develop strategies that drive growth, improve operational efficiency, and create long-term value.</p>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Strategy Consulting">
+        </div>
+    </section>
+    
+    <section class="services-details">
+        <div class="container">
+            <h2 style="text-align: center; color: var(--primary); margin-bottom: 50px;">Our Strategy Consulting Services</h2>
+            
+            <div class="services-grid">
+                <div class="service-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Business Strategy Development</h3>
+                    <p>Comprehensive business strategy formulation aligned with your vision, mission, and long-term objectives.</p>
+                </div>
+                
+                <div class="service-item">
+                    <i class="fas fa-search-dollar"></i>
+                    <h3>Market Research & Competitive Analysis</h3>
+                    <p>In-depth market analysis to identify opportunities, threats, and your competitive positioning.</p>
+                </div>
+                
+                <div class="service-item">
+                    <i class="fas fa-people-carry"></i>
+                    <h3>Change Management & Growth Planning</h3>
+                    <p>Structured approaches to organizational change and strategic growth initiatives.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="benefits-section">
+        <div class="container benefits-content">
+            <h2 style="text-align: center; margin-bottom: 50px;">Benefits of Our Strategy Consulting</h2>
+            
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <i class="fas fa-bullseye"></i>
+                    <h3>Clear Direction</h3>
+                    <p>Establish a clear strategic direction and roadmap for your organization.</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <i class="fas fa-chart-pie"></i>
+                    <h3>Informed Decisions</h3>
+                    <p>Make data-driven decisions based on comprehensive market analysis.</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <h3>Improved Performance</h3>
+                    <p>Enhance organizational performance through strategic alignment.</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Risk Mitigation</h3>
+                    <p>Identify and mitigate potential risks to your business strategy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta-section">
+        <div class="container cta-content">
+            <h2>Ready to Transform Your Business Strategy?</h2>
+            <p>Discover how our tailored strategic solutions can help your business thrive in today's competitive landscape. Contact us today to schedule a consultation with our experts.</p>
+            <a href="#contact" class="cta-button">Contact Us Today</a>
+        </div>
+    </section>
+    
+    
+
+    <script>
+        // Animation for elements when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedItems = document.querySelectorAll('.service-item, .benefit-item');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animatedItems.forEach(item => {
+                observer.observe(item);
+            });
+        });
+    </script>
+</body>
+</html>

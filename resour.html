@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Resources - B3 Strategic Consulting</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap">
+    <style>
+        :root {
+            --primary: #1a5276;
+            --secondary: #2e86c1;
+            --accent: #f39c12;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --cyber-dark: #0a1929;
+            --cyber-blue: #0d47a1;
+            --transition: all 0.3s ease-in-out;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            position: relative;
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links i {
+            margin-left: 5px;
+            transition: var(--transition);
+        }
+        
+        .dropdown:hover i {
+            transform: rotate(180deg);
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            width: 220px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            z-index: 100;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-menu li {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .dropdown-menu a {
+            padding: 12px 20px;
+            display: block;
+            border-bottom: 1px solid #f1f1f1;
+        }
+        
+        .dropdown-menu a:hover {
+            background: var(--light);
+            color: var(--primary);
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--cyber-dark) 0%, var(--cyber-blue) 100%);
+            color: white;
+            padding: 100px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 0;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.07)"/></svg>');
+            background-size: 100% 100%;
+        }
+        
+        .cyber-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .cyber-node {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: rgba(13, 71, 161, 0.6);
+            border-radius: 50%;
+        }
+        
+        .cyber-connection {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(13, 161, 146, 0.6), transparent);
+            transform-origin: 0 50%;
+        }
+        
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+            position: relative;
+            z-index: 2;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            animation: fadeInUp 1s ease;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .breadcrumb {
+            background-color: var(--light);
+            padding: 15px 0;
+            margin-bottom: 30px;
+        }
+        
+        .breadcrumb-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .breadcrumb-links a {
+            color: var(--dark);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .breadcrumb-links a:hover {
+            color: var(--primary);
+        }
+        
+        .breadcrumb-links span {
+            color: var(--secondary);
+            margin: 0 10px;
+        }
+        
+        /* Resources Section */
+        .resources-section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            color: var(--cyber-dark);
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .resource-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .resource-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .resource-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .resource-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .resource-card:hover .resource-image img {
+            transform: scale(1.05);
+        }
+        
+        .resource-content {
+            padding: 25px;
+        }
+        
+        .resource-category {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .resource-content h3 {
+            font-size: 1.5rem;
+            color: var(--cyber-dark);
+            margin-bottom: 15px;
+        }
+        
+        .resource-content p {
+            color: #555;
+            margin-bottom: 20px;
+        }
+        
+        .resource-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .resource-price {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .resource-price.free {
+            color: #27ae60;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Filter Section */
+        .filter-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+        }
+        
+        .filter-title {
+            font-size: 1.2rem;
+            color: var(--cyber-dark);
+            margin-bottom: 20px;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            background: var(--light);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--cyber-dark) 0%, var(--cyber-blue) 100%);
+            color: white;
+            margin-top: 60px;
+        }
+        
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            box-shadow: 0 5px 20px rgba(243, 156, 18, 0.4);
+        }
+        
+        .cta-button:hover {
+            background: #e67e22;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(243, 156, 18, 0.5);
+        }
+        
+        footer {
+            background: var(--cyber-dark);
+            color: white;
+            padding: 50px 0 30px;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .footer-logo {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-logo h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .footer-logo span {
+            color: var(--accent);
+        }
+        
+        .footer-contact {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-contact h4 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .contact-info {
+            list-style: none;
+        }
+        
+        .contact-info li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info i {
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 10px 15px;
+            }
+            
+            .dropdown-menu {
+                left: -50%;
+            }
+            
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">B3</div>
+                B3 Strategic Consulting
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="why.html">Why us</a></li>
+                <li class="dropdown">
+                    <a href="#">Services <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="strategy.html">Strategy Consulting</a></li>
+                        <li><a href="operation.html">Operations Optimization</a></li>
+                        <li><a href="business.html">Business Analytics & Insights</a></li>
+                        <li><a href="cyb.html">Cybersecurity for Businesses</a></li>
+                        <li><a href="Digital.html">Digital Transformation</a></li>
+                        <li><a href="financial.html">Financial & Risk Management</a></li>
+                        <li><a href="org.html">Organizational Development & Training</a></li>
+                        <li><a href="sus.html">Sustainability & Growth Consulting</a></li>
+                    </ul>
+                </li>
+                <li><a href="price.html">Pricing</a></li>
+                <li><a href="blog.html">Blogs</a></li>
+                <li><a href="resour.html" class="active">Resources</a></li>
+                <li><a href="appoint.html">Appointment</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header>
+        <div class="cyber-animation" id="cyberAnimation"></div>
+        <div class="container">
+            <h1>Business Resources & Tools</h1>
+            <p>Access our library of free and premium resources to strengthen your strategy, operations, and cybersecurity posture</p>
+        </div>
+    </header>
+    
+    
+    
+    <section class="resources-section">
+        <div class="container">
+            <h2 class="section-title">Available Resources</h2>
+            
+            <div class="filter-section">
+                <h3 class="filter-title">Filter Resources:</h3>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All Resources</button>
+                    <button class="filter-btn" data-filter="free">Free Resources</button>
+                    <button class="filter-btn" data-filter="premium">Premium Resources</button>
+                    <button class="filter-btn" data-filter="guides">Guides & eBooks</button>
+                    <button class="filter-btn" data-filter="templates">Templates</button>
+                    <button class="filter-btn" data-filter="webinars">Webinars</button>
+                </div>
+            </div>
+            
+            <div class="resources-grid">
+                <div class="resource-card" data-category="free guides">
+                    <div class="resource-image">
+                        <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Business Strategy Guide">
+                    </div>
+                    <div class="resource-content">
+                        <span class="resource-category">Free • Guide</span>
+                        <h3>Strategic Planning Framework</h3>
+                        <p>Comprehensive guide to developing and implementing effective business strategies with practical frameworks.</p>
+                        <div class="resource-meta">
+                            <span class="resource-price free">Free Download</span>
+                            <a href="#" class="btn">Download</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resource-card" data-category="free templates">
+                    <div class="resource-image">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="SWOT Analysis Template">
+                    </div>
+                    <div class="resource-content">
+                        <span class="resource-category">Free • Template</span>
+                        <h3>SWOT Analysis Toolkit</h3>
+                        <p>Complete set of templates for conducting comprehensive SWOT analyses for businesses of all sizes.</p>
+                        <div class="resource-meta">
+                            <span class="resource-price free">Free Download</span>
+                            <a href="#" class="btn">Download</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resource-card" data-category="premium webinars">
+                    <div class="resource-image">
+                        <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Cybersecurity Webinar">
+                    </div>
+                    <div class="resource-content">
+                        <span class="resource-category">Premium • Webinar</span>
+                        <h3>Cybersecurity Best Practices</h3>
+                        <p>Expert-led webinar on implementing effective cybersecurity measures for small to medium businesses.</p>
+                        <div class="resource-meta">
+                            <span class="resource-price">$49.99</span>
+                            <a href="#" class="btn">Access Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resource-card" data-category="premium guides">
+                    <div class="resource-image">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="KPI Dashboard Guide">
+                    </div>
+                    <div class="resource-content">
+                        <span class="resource-category">Premium • Guide</span>
+                        <h3>KPI Dashboard Mastery</h3>
+                        <p>Learn how to create and implement effective KPI dashboards to track business performance.</p>
+                        <div class="resource-meta">
+                            <span class="resource-price">$79.99</span>
+                            <a href="#" class="btn">Get Guide</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resource-card" data-category="free templates">
+                    <div class="resource-image">
+                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Risk Assessment Template">
+                    </div>
+                    <div class="resource-content">
+                        <span class="resource-category">Free • Template</span>
+                        <h3>Risk Assessment Framework</h3>
+                        <p>Comprehensive templates for identifying, assessing and mitigating business risks.</p>
+                        <div class="resource-meta">
+                            <span class="resource-price free">Free Download</span>
+                            <a href="#" class="btn">Download</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resource-card" data-category="premium webinars">
+                    <div class="resource-image">
+                        <img src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Digital Transformation Webinar">
+                    </div>
+                    <div class="resource-content">
+                        <span class="resource-category">Premium • Webinar</span>
+                        <h3>Digital Transformation Roadmap</h3>
+                        <p>Step-by-step guide to planning and executing successful digital transformation initiatives.</p>
+                        <div class="resource-meta">
+                            <span class="resource-price">$59.99</span>
+                            <a href="#" class="btn">Access Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta-section">
+        <div class="container cta-content">
+            <h2>Unlock Exclusive Resources</h2>
+            <p>Subscribe to our premium plan to access our full library of business resources, templates, and expert-led webinars.</p>
+            <a href="#" class="cta-button">Subscribe Now</a>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>B3 <span>Strategic Consulting</span></h3>
+                    <p>Empowering businesses through strategic intelligence and innovative solutions.</p>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Business Avenue, Suite 500</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@b3consulting.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 B3 Strategic Consulting. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Animation for elements when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedItems = document.querySelectorAll('.resource-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animatedItems.forEach(item => {
+                observer.observe(item);
+            });
+            
+            // Create cyber animation
+            createCyberAnimation();
+            
+            // Filter functionality
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const resourceCards = document.querySelectorAll('.resource-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    const filter = button.getAttribute('data-filter');
+                    
+                    resourceCards.forEach(card => {
+                        if (filter === 'all') {
+                            card.style.display = 'block';
+                        } else {
+                            const categories = card.getAttribute('data-category').split(' ');
+                            if (categories.includes(filter)) {
+                                card.style.display = 'block';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+        });
+        
+        function createCyberAnimation() {
+            const container = document.getElementById('cyberAnimation');
+            const nodeCount = 20;
+            const nodes = [];
+            
+            // Create nodes
+            for (let i = 0; i < nodeCount; i++) {
+                const node = document.createElement('div');
+                node.classList.add('cyber-node');
+                
+                // Random position
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                node.style.left = `${x}%`;
+                node.style.top = `${y}%`;
+                
+                container.appendChild(node);
+                nodes.push({ element: node, x, y });
+            }
+            
+            // Create connections between nearby nodes
+            nodes.forEach((node, i) => {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const otherNode = nodes[j];
+                    const distance = Math.sqrt(Math.pow(node.x - otherNode.x, 2) + Math.pow(node.y - otherNode.y, 2));
+                    
+                    if (distance < 30) { // Only connect nearby nodes
+                        const connection = document.createElement('div');
+                        connection.classList.add('cyber-connection');
+                        
+                        const angle = Math.atan2(otherNode.y - node.y, otherNode.x - node.x) * 180 / Math.PI;
+                        const length = distance;
+                        
+                        connection.style.width = `${length}%`;
+                        connection.style.left = `${node.x}%`;
+                        connection.style.top = `${node.y}%`;
+                        connection.style.transform = `rotate(${angle}deg)`;
+                        
+                        container.appendChild(connection);
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

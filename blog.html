@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - B3 Strategic Consulting</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a2a6c;
+            --primary-light: #2b4db9;
+            --secondary: #4ecdc4;
+            --accent: #ff6b6b;
+            --light: #f8f9fa;
+            --dark: #0d1b3f;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: #0b2c4d;
+            color: #fff;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            z-index: 1001;
+        }
+
+        /* Nav Links */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        
+        .nav-links li {
+            position: relative;
+        }
+        
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 10px;
+            transition: 0.3s;
+            display: block;
+        }
+        
+        .nav-links a:hover {
+            background: #1a4a7a;
+            border-radius: 5px;
+        }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #1a4a7a;
+            list-style: none;
+            padding: 10px 0;
+            border-radius: 5px;
+            min-width: 220px;
+            z-index: 1000;
+        }
+        
+        .dropdown-menu li a {
+            display: block;
+            padding: 8px 15px;
+            white-space: nowrap;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        /* Hamburger Menu (Mobile) */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1001;
+        }
+        
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+        
+        .menu-toggle.open span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .menu-toggle.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                flex-direction: column;
+                background: #0b2c4d;
+                width: 80%;
+                height: 100vh;
+                text-align: left;
+                transition: 0.4s;
+                padding: 100px 30px 30px;
+                box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
+                overflow-y: auto;
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .dropdown-menu {
+                position: static;
+                background: #133b64;
+                border-radius: 0;
+                display: none;
+                margin: 10px 0 10px 15px;
+                width: calc(100% - 30px);
+            }
+            
+            .dropdown.open .dropdown-menu {
+                display: block;
+            }
+            
+            /* Overlay when menu is open */
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 998;
+            }
+            
+            .overlay.active {
+                display: block;
+            }
+        }
+        
+        /* Blog Hero Section */
+        .blog-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .blog-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="rgba(255,255,255,0.05)"/><path d="M0 50 L100 50 M50 0 L50 100" stroke="rgba(255,255,255,0.08)" stroke-width="1"/></svg>');
+            background-size: 30px;
+        }
+        
+        .blog-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .blog-hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            color: white;
+            font-family: 'Playfair Display', serif;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .blog-hero p {
+            font-size: 1.3rem;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+            max-width: 700px;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Intro Section */
+        .intro-section {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .intro-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .intro-content p {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            color: var(--gray);
+            line-height: 1.8;
+        }
+        
+        .intro-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Blog Content Section */
+        .blog-content {
+            padding: 80px 0;
+            background: var(--light);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .section-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            color: var(--gray);
+        }
+        
+        /* Blog Categories */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        
+        .category-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .category-icon {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .category-icon img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+        
+        .category-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 20px;
+        }
+        
+        .category-card p {
+            color: var(--gray);
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 1.1rem;
+            cursor: pointer;
+            border: none;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+            z-index: -1;
+        }
+        
+        .btn:hover::before {
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background: var(--secondary);
+            color: var(--dark);
+            box-shadow: 0 5px 20px rgba(78, 205, 196, 0.4);
+        }
+        
+        .btn-primary:hover {
+            background: #3cbdb4;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(78, 205, 196, 0.5);
+        }
+        
+        /* Featured Posts */
+        .featured-posts {
+            margin-bottom: 80px;
+        }
+        
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        
+        .post-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        
+        .post-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .post-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        .post-image {
+            height: 220px;
+            overflow: hidden;
+        }
+        
+        .post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s ease;
+        }
+        
+        .post-card:hover .post-image img {
+            transform: scale(1.1);
+        }
+        
+        .post-content {
+            padding: 30px;
+        }
+        
+        .post-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .post-meta span {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+        
+        .post-meta i {
+            margin-right: 8px;
+            color: var(--secondary);
+        }
+        
+        .post-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .post-content p {
+            color: var(--gray);
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+        
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .read-more i {
+            margin-left: 8px;
+            transition: var(--transition);
+        }
+        
+        .read-more:hover {
+            color: var(--primary-light);
+        }
+        
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            padding: 100px 0;
+            color: white;
+            text-align: center;
+            border-radius: 15px;
+            margin: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="rgba(255,255,255,0.05)"/><path d="M0 50 L100 50 M50 0 L50 100" stroke="rgba(255,255,255,0.08)" stroke-width="1"/></svg>');
+            background-size: 30px;
+        }
+        
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-title {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            color: white;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .cta-text {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+        
+        .btn-light {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.25);
+            font-weight: 600;
+            padding: 18px 40px;
+            width: auto;
+            border-radius: 50px;
+            display: inline-block;
+        }
+        
+        .btn-light:hover {
+            background: #f0f0f0;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.35);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 100px 0 40px;
+            margin-top: 100px;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            top: 0;
+            left: 0;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-logo span {
+            color: var(--secondary);
+        }
+        
+        .footer-about p {
+            margin-bottom: 25px;
+            opacity: 0.7;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--secondary);
+            color: var(--dark);
+            transform: translateY(-5px);
+        }
+        
+        .footer-heading {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 12px;
+        }
+        
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary);
+            bottom: 0;
+            left: 0;
+            border-radius: 3px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            display: block;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+            padding-left: 8px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.95rem;
+        }
+        
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .blog-hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .cta-title {
+                font-size: 2.4rem;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .categories {
+                grid-template-columns: 1fr;
+                max-width: 550px;
+                margin: 0 auto 80px;
+            }
+            
+            .posts-grid {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .blog-hero {
+                padding: 100px 0 60px;
+            }
+            
+            .blog-hero h1 {
+                font-size: 2.4rem;
+            }
+            
+            .blog-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+            
+            .intro-content p {
+                font-size: 1.1rem;
+            }
+            
+            .cta-title {
+                font-size: 2rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .blog-hero {
+                padding: 80px 0 40px;
+            }
+            
+            .blog-hero h1 {
+                font-size: 2rem;
+                line-height: 1.2;
+            }
+            
+            .section-header h2 {
+                font-size: 1.9rem;
+            }
+            
+            .category-card {
+                padding: 30px 20px;
+            }
+            
+            .cta-title {
+                font-size: 1.8rem;
+            }
+            
+            .cta-text {
+                font-size: 1rem;
+            }
+            
+            .footer-content {
+                gap: 30px;
+            }
+            
+            .footer-about p {
+                font-size: 0.95rem;
+            }
+            
+            .footer-heading {
+                font-size: 1.2rem;
+            }
+            
+            .footer-links a {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">B3 Strategic Consulting</div>
+                <div class="menu-toggle" id="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="why.html">Why us</a></li>
+                    <li class="dropdown">
+                        <a href="#">Services <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="strategy.html">Strategy Consulting</a></li>
+                            <li><a href="operation.html">Operations Optimization</a></li>
+                            <li><a href="business.html">Business Analytics & Insights</a></li>
+                            <li><a href="cyb.html">Cybersecurity for Businesses</a></li>
+                            <li><a href="Digital.html">Digital Transformation</a></li>
+                            <li><a href="financial.html">Financial & Risk Management</a></li>
+                            <li><a href="org.html">Organizational Development & Training</a></li>
+                            <li><a href="sus.html">Sustainability & Growth Consulting</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="price.html">Pricing</a></li>
+                    <li><a href="blog.html">Blogs</a></li>
+                    <li><a href="resour.html">Resources</a></li>
+                    <li><a href="appoint.html">Appointment</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="overlay" id="overlay"></div>
+    </header>
+
+    <!-- Blog Hero Section -->
+    <section class="blog-hero">
+        <div class="container blog-hero-content">
+            <h1>Insights That Empower Smarter Decisions</h1>
+            <p>Expert insights, practical guides, and thought leadership for business leaders</p>
+        </div>
+    </section>
+
+    <!-- Intro Section -->
+    <section class="intro-section">
+        <div class="container intro-content">
+            <p>At B3 Strategic Consulting, we believe knowledge is power. Our blog is where strategy meets innovation, operations meet efficiency, analytics meet clarity, and cybersecurity meets resilience.</p>
+            
+            <p>Here, you'll find expert insights, practical guides, case studies, and thought leadership articles designed to help entrepreneurs, business leaders, and decision-makers navigate today's competitive business environment.</p>
+            
+            <p>Whether you're looking to streamline operations, make data-driven decisions, secure your business from cyber threats, or prepare for the future of work — our blog provides actionable strategies and real-world solutions you can apply today.</p>
+        </div>
+    </section>
+
+    <!-- Blog Content Section -->
+    <section class="blog-content">
+        <div class="container">
+            <div class="section-header">
+                <h2>Explore Our Insights</h2>
+                <p>Browse our latest articles and resources by category</p>
+            </div>
+            
+            <div class="categories">
+                <div class="category-card fade-in">
+                    <div class="category-icon">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3594/3594484.png" alt="Strategy Icon">
+                    </div>
+                    <h3>Business Strategy</h3>
+                    <p>Strategic planning, market analysis, competitive advantage, and growth strategies for sustainable business success.</p>
+                    <a href="#" class="btn btn-primary">Read Articles</a>
+                </div>
+                
+                <div class="category-card fade-in">
+                    <div class="category-icon">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3594/3594428.png" alt="Operations Icon">
+                    </div>
+                    <h3>Operations Optimization</h3>
+                    <p>Process improvement, supply chain management, workflow efficiency, and operational excellence insights.</p>
+                    <a href="#" class="btn btn-primary">Read Articles</a>
+                </div>
+                
+                <div class="category-card fade-in">
+                    <div class="category-icon">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3594/3594479.png" alt="Analytics Icon">
+                    </div>
+                    <h3>Business Analytics</h3>
+                    <p>Data-driven decision making, KPI tracking, performance metrics, and business intelligence strategies.</p>
+                    <a href="#" class="btn btn-primary">Read Articles</a>
+                </div>
+            </div>
+            
+            <div class="featured-posts">
+                <div class="section-header">
+                    <h2>Featured Articles</h2>
+                    <p>Our most popular and recent insights</p>
+                </div>
+                
+                <div class="posts-grid">
+                    <div class="post-card fade-in">
+                        <div class="post-image">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Digital Transformation">
+                        </div>
+                        <div class="post-content">
+                            <div class="post-meta">
+                                <span><i class="far fa-calendar"></i> June 15, 2023</span>
+                                <span><i class="far fa-clock"></i> 5 min read</span>
+                            </div>
+                            <h3>The Future of Digital Transformation in Post-Pandemic Business</h3>
+                            <p>Explore how businesses are adapting their digital strategies in a rapidly changing economic landscape and what it means for future growth.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="post-card fade-in">
+                        <div class="post-image">
+                            <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Cybersecurity">
+                        </div>
+                        <div class="post-content">
+                            <div class="post-meta">
+                                <span><i class="far fa-calendar"></i> May 28, 2023</span>
+                                <span><i class="far fa-clock"></i> 7 min read</span>
+                            </div>
+                            <h3>Cybersecurity Best Practices for Remote Work Environments</h3>
+                            <p>Learn essential security measures to protect your business data and systems as remote work becomes increasingly prevalent.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="post-card fade-in">
+                        <div class="post-image">
+                            <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Data Analytics">
+                        </div>
+                        <div class="post-content">
+                            <div class="post-meta">
+                                <span><i class="far fa-calendar"></i> April 12, 2023</span>
+                                <span><i class="far fa-clock"></i> 6 min read</span>
+                            </div>
+                            <h3>Leveraging Data Analytics for Competitive Advantage</h3>
+                            <p>Discover how businesses are using advanced analytics to gain insights, predict trends, and outperform their competition.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cta-section">
+                <div class="cta-content">
+                    <h2 class="cta-title">Never Miss an Insight</h2>
+                    <p class="cta-text">Subscribe to our newsletter and get the latest strategies, insights, and expert advice delivered directly to your inbox.</p>
+                    <a href="#" class="btn btn-light">Subscribe Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+     
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">B3 STRATEGIC CONSULTING</div>
+                    <p>We provide strategic consulting services that help businesses transform, innovate, and grow in today's competitive landscape.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="footer-heading">Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Business Strategy</a></li>
+                        <li><a href="#">Operations Optimization</a></li>
+                        <li><a href="#">Data Analytics</a></li>
+                        <li><a href="#">Cybersecurity</a></li>
+                        <li><a href="#">Risk Management</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="footer-heading">Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Business District, City</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@b3strategic.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 B3 Strategic Consulting. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        const menuToggle = document.getElementById('mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+        const overlay = document.getElementById('overlay');
+        const dropdowns = document.querySelectorAll('.dropdown');
+        
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('open');
+            navLinks.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
+        });
+        
+        overlay.addEventListener('click', () => {
+            menuToggle.classList.remove('open');
+            navLinks.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            
+            // Close any open dropdowns
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove('open');
+            });
+        });
+        
+        // Dropdown functionality for mobile
+        dropdowns.forEach(dropdown => {
+            const link = dropdown.querySelector('a');
+            
+            link.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    dropdown.classList.toggle('open');
+                }
+            });
+        });
+        
+        // Scroll animation for elements
+        function checkFade() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementBottom = element.getBoundingClientRect().bottom;
+                
+                // Check if element is in viewport
+                if (elementTop < window.innerHeight - 100 && elementBottom > 0) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        // Initial check
+        window.addEventListener('load', checkFade);
+        // Check on scroll
+        window.addEventListener('scroll', checkFade);
+    </script>
+</body>
+</html>

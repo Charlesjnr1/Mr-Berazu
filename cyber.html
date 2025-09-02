@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity for Businesses - B3 Strategic Consulting</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap">
+    <style>
+        :root {
+            --primary: #1a5276;
+            --secondary: #2e86c1;
+            --accent: #f39c12;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --cyber-dark: #0a1929;
+            --cyber-blue: #0d47a1;
+            --transition: all 0.3s ease-in-out;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            position: relative;
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links i {
+            margin-left: 5px;
+            transition: var(--transition);
+        }
+        
+        .dropdown:hover i {
+            transform: rotate(180deg);
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            width: 220px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            z-index: 100;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-menu li {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .dropdown-menu a {
+            padding: 12px 20px;
+            display: block;
+            border-bottom: 1px solid #f1f1f1;
+        }
+        
+        .dropdown-menu a:hover {
+            background: var(--light);
+            color: var(--primary);
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--cyber-dark) 0%, var(--cyber-blue) 100%);
+            color: white;
+            padding: 100px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 0;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.07)"/></svg>');
+            background-size: 100% 100%;
+        }
+        
+        .cyber-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .cyber-node {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: rgba(13, 71, 161, 0.6);
+            border-radius: 50%;
+        }
+        
+        .cyber-connection {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(13, 161, 146, 0.6), transparent);
+            transform-origin: 0 50%;
+        }
+        
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+            position: relative;
+            z-index: 2;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            animation: fadeInUp 1s ease;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .breadcrumb {
+            background-color: var(--light);
+            padding: 15px 0;
+            margin-bottom: 30px;
+        }
+        
+        .breadcrumb-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .breadcrumb-links a {
+            color: var(--dark);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .breadcrumb-links a:hover {
+            color: var(--primary);
+        }
+        
+        .breadcrumb-links span {
+            color: var(--secondary);
+            margin: 0 10px;
+        }
+        
+        .service-hero {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin: 50px 0;
+            align-items: center;
+        }
+        
+        .hero-content {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .hero-content h2 {
+            font-size: 2.2rem;
+            color: var(--cyber-dark);
+            margin-bottom: 20px;
+        }
+        
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            color: #555;
+        }
+        
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: var(--transition);
+            position: relative;
+            height: 400px;
+        }
+        
+        .hero-image:hover {
+            transform: perspective(1000px) rotateY(0);
+        }
+        
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: var(--transition);
+        }
+        
+        .services-details {
+            background: white;
+            padding: 60px 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+            margin: 50px 0;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .service-item {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 30px;
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+            border-left: 5px solid var(--accent);
+        }
+        
+        .service-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .service-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-item i {
+            font-size: 2.5rem;
+            color: var(--cyber-blue);
+            margin-bottom: 20px;
+        }
+        
+        .service-item h3 {
+            font-size: 1.5rem;
+            color: var(--cyber-dark);
+            margin-bottom: 15px;
+        }
+        
+        .service-item p {
+            color: #555;
+        }
+        
+        .threat-showcase {
+            padding: 80px 0;
+            background: linear-gradient(to right, var(--cyber-dark), var(--cyber-blue));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .threat-showcase::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,70 C20,40 50,100 100,70 L100,100 L0,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: 100% 100%;
+        }
+        
+        .showcase-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        
+        .showcase-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+        
+        .threat-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .threat-stat {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+            transition: var(--transition);
+        }
+        
+        .threat-stat:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+        }
+        
+        .compliance-section {
+            padding: 80px 0;
+            background: var(--light);
+        }
+        
+        .compliance-container {
+            text-align: center;
+        }
+        
+        .compliance-container h2 {
+            color: var(--cyber-dark);
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+        }
+        
+        .compliance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .compliance-item {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .compliance-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .compliance-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .compliance-item i {
+            font-size: 2.5rem;
+            color: var(--cyber-blue);
+            margin-bottom: 15px;
+        }
+        
+        .compliance-item h3 {
+            color: var(--cyber-dark);
+            margin-bottom: 15px;
+        }
+        
+        .benefits-section {
+            background: white;
+            padding: 70px 0;
+            margin: 70px 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+        }
+        
+        .benefits-content {
+            text-align: center;
+        }
+        
+        .benefits-content h2 {
+            color: var(--cyber-dark);
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .benefit-item {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 8px;
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+        
+        .benefit-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .benefit-item:nth-child(even) {
+            transform: translateX(30px);
+        }
+        
+        .benefit-item:nth-child(even).visible {
+            transform: translateX(0);
+        }
+        
+        .benefit-item:hover {
+            transform: translateY(-5px) !important;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .benefit-item i {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        
+        .benefit-item h3 {
+            color: var(--cyber-dark);
+            margin-bottom: 15px;
+        }
+        
+        .cta-section {
+            text-align: center;
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--cyber-dark) 0%, var(--cyber-blue) 100%);
+            color: white;
+        }
+        
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            box-shadow: 0 5px 20px rgba(243, 156, 18, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button:hover {
+            background: #e67e22;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(243, 156, 18, 0.5);
+        }
+        
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0));
+            transform: rotate(30deg);
+            transition: var(--transition);
+            opacity: 0;
+        }
+        
+        .cta-button:hover::after {
+            animation: shine 1.5s ease;
+        }
+        
+        footer {
+            background: var(--cyber-dark);
+            color: white;
+            padding: 50px 0 30px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .footer-logo {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-logo h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .footer-logo span {
+            color: var(--accent);
+        }
+        
+        .footer-contact {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-contact h4 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .contact-info {
+            list-style: none;
+        }
+        
+        .contact-info li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info i {
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes shine {
+            0% {
+                opacity: 0;
+                transform: rotate(30deg) translate(0, -100%);
+            }
+            20% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: rotate(30deg) translate(0, 100%);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 10px 15px;
+            }
+            
+            .dropdown-menu {
+                left: -50%;
+            }
+            
+            .service-hero {
+                flex-direction: column;
+            }
+            
+            .hero-image {
+                transform: none;
+                height: 300px;
+            }
+            
+            .hero-image:hover {
+                transform: none;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .threat-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="#" class="logo">B3 Strategic Consulting</a>
+            <ul class="nav-links">
+<li><a href="index.html">Home</a></li>
+                <li><a href="why.html">Why us</a></li>
+                <li class="dropdown">
+                    <a href="#">Services <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="strategy.html">Strategy Consulting</a></li>
+                        <li><a href="operation.html">Operations Optimization</a></li>
+                        <li><a href="business.html">Business Analytics & Insights</a></li>
+                        <li><a href="cyb.html">Cybersecurity for Businesses</a></li>
+                        <li><a href="Digital.html">Digital Transformation</a></li>
+                        <li><a href="financial.html">Financial & Risk Management</a></li>
+                        <li><a href="org.html">Organizational Development & Training</a></li>
+                        <li><a href="sus.html">Sustainability & Growth Consulting</a></li>
+                    </ul>
+                </li>
+                <li><a href="price.html">Pricing</a></li>
+                <li><a href="blog.html">Blogs</a></li>
+                <li><a href="resour.html">Resources</a></li>
+                <li><a href="appoint.html">Appointment</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header>
+        <div class="cyber-animation" id="cyberAnimation"></div>
+        <div class="container">
+            <h1>Cybersecurity for Businesses</h1>
+            <p>Protect your organization from evolving cyber threats with our comprehensive security solutions</p>
+        </div>
+    </header>
+    
+    
+    
+    <section class="container service-hero">
+        <div class="hero-content">
+            <h2>Comprehensive Cybersecurity Protection</h2>
+            <p>Our Cybersecurity services are designed to protect your business from the ever-evolving landscape of cyber threats. We provide end-to-end security solutions that safeguard your data, systems, and reputation.</p>
+            <p>With expertise across all aspects of cybersecurity, we help you build a resilient security posture that can withstand modern threats while ensuring compliance with industry regulations.</p>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Cybersecurity">
+        </div>
+    </section>
+    
+    <section class="services-details">
+        <div class="container">
+            <h2 style="text-align: center; color: var(--cyber-dark); margin-bottom: 50px;">Our Cybersecurity Services</h2>
+            
+            <div class="services-grid">
+                <div class="service-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Risk Assessments & Vulnerability Checks</h3>
+                    <p>Comprehensive security assessments to identify vulnerabilities and evaluate your organization's risk posture.</p>
+                </div>
+                
+                <div class="service-item">
+                    <i class="fas fa-user-graduate"></i>
+                    <h3>Security Awareness Training</h3>
+                    <p>Engaging training programs to educate employees on cybersecurity best practices and threat recognition.</p>
+                </div>
+                
+                <div class="service-item">
+                    <i class="fas fa-file-contract"></i>
+                    <h3>Compliance with Industry Regulations</h3>
+                    <p>Ensure your organization meets all relevant cybersecurity regulations and industry standards.</p>
+                </div>
+                
+                <div class="service-item">
+                    <i class="fas fa-first-aid"></i>
+                    <h3>Incident Response Planning & Resilience Building</h3>
+                    <p>Develop comprehensive incident response plans and build organizational resilience against cyber attacks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="threat-showcase">
+        <div class="container showcase-content">
+            <h2>The Growing Cybersecurity Threat Landscape</h2>
+            <div class="threat-stats">
+                <div class="threat-stat">
+                    <div class="stat-value">68%</div>
+                    <div class="stat-label">of business leaders feel their cybersecurity risks are increasing</div>
+                </div>
+                
+                <div class="threat-stat">
+                    <div class="stat-value">43%</div>
+                    <div class="stat-label">of cyber attacks target small businesses</div>
+                </div>
+                
+                <div class="threat-stat">
+                    <div class="stat-value">$4.35M</div>
+                    <div class="stat-label">average cost of a data breach in 2022</div>
+                </div>
+                
+                <div class="threat-stat">
+                    <div class="stat-value">85%</div>
+                    <div class="stat-label">of breaches involve human element</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="compliance-section">
+        <div class="container compliance-container">
+            <h2>Industry Compliance Standards We Address</h2>
+            <div class="compliance-grid">
+                <div class="compliance-item">
+                    <i class="fab fa-usps"></i>
+                    <h3>GDPR</h3>
+                    <p>General Data Protection Regulation compliance for organizations handling EU citizen data.</p>
+                </div>
+                
+                <div class="compliance-item">
+                    <i class="fas fa-heartbeat"></i>
+                    <h3>HIPAA</h3>
+                    <p>Health Insurance Portability and Accountability Act compliance for healthcare organizations.</p>
+                </div>
+                
+                <div class="compliance-item">
+                    <i class="fas fa-credit-card"></i>
+                    <h3>PCI DSS</h3>
+                    <p>Payment Card Industry Data Security Standard for organizations handling cardholder data.</p>
+                </div>
+                
+                <div class="compliance-item">
+                    <i class="fas fa-building"></i>
+                    <h3>SOX</h3>
+                    <p>Sarbanes-Oxley Act compliance for financial reporting and data protection.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="benefits-section">
+        <div class="container benefits-content">
+            <h2>Benefits of Our Cybersecurity Services</h2>
+            
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <i class="fas fa-lock"></i>
+                    <h3>Enhanced Protection</h3>
+                    <p>Comprehensive security measures to protect your sensitive data and systems from cyber threats.</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Regulatory Compliance</h3>
+                    <p>Ensure compliance with industry regulations and avoid costly penalties.</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <i class="fas fa-shield-virus"></i>
+                    <h3>Threat Prevention</h3>
+                    <p>Proactive identification and mitigation of potential security vulnerabilities.</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <i class="fas fa-users"></i>
+                    <h3>Employee Awareness</h3>
+                    <p>Educated workforce that serves as your first line of defense against cyber threats.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta-section">
+        <div class="container cta-content">
+            <h2>Ready to Secure Your Business?</h2>
+            <p>Discover how our tailored cybersecurity solutions can protect your business from evolving threats. Contact us today to schedule a security assessment.</p>
+            <a href="#contact" class="cta-button">Contact Us Today</a>
+        </div>
+    </section>
+    
+    
+
+    <script>
+        // Animation for elements when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedItems = document.querySelectorAll('.service-item, .benefit-item, .compliance-item');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animatedItems.forEach(item => {
+                observer.observe(item);
+            });
+            
+            // Create cyber animation
+            createCyberAnimation();
+        });
+        
+        function createCyberAnimation() {
+            const container = document.getElementById('cyberAnimation');
+            const nodeCount = 20;
+            const nodes = [];
+            
+            // Create nodes
+            for (let i = 0; i < nodeCount; i++) {
+                const node = document.createElement('div');
+                node.classList.add('cyber-node');
+                
+                // Random position
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                node.style.left = `${x}%`;
+                node.style.top = `${y}%`;
+                
+                container.appendChild(node);
+                nodes.push({ element: node, x, y });
+            }
+            
+            // Create connections between nearby nodes
+            nodes.forEach((node, i) => {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const otherNode = nodes[j];
+                    const distance = Math.sqrt(Math.pow(node.x - otherNode.x, 2) + Math.pow(node.y - otherNode.y, 2));
+                    
+                    if (distance < 30) { // Only connect nearby nodes
+                        const connection = document.createElement('div');
+                        connection.classList.add('cyber-connection');
+                        
+                        const angle = Math.atan2(otherNode.y - node.y, otherNode.x - node.x) * 180 / Math.PI;
+                        const length = distance;
+                        
+                        connection.style.width = `${length}%`;
+                        connection.style.left = `${node.x}%`;
+                        connection.style.top = `${node.y}%`;
+                        connection.style.transform = `rotate(${angle}deg)`;
+                        
+                        container.appendChild(connection);
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
